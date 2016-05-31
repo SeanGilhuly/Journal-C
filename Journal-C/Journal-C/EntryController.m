@@ -10,4 +10,34 @@
 
 @implementation EntryController
 
+-(instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.entries = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
++(EntryController *)sharedInstance
+{
+    static EntryController *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^ {
+        sharedInstance = [EntryController new];
+    });
+    return sharedInstance;
+}
+
+
+-(void)addEntry:(Entry *)entry
+{
+    [self.entries addObject:entry];
+}
+
+-(void)removeEntry:(Entry *)entry;
+{
+    [self.entries addObject:entry];
+}
+
 @end

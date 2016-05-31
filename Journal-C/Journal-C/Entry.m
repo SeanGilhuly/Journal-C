@@ -10,4 +10,14 @@
 
 @implementation Entry
 
+-(instancetype)initWithTimeStamp:(NSString *)timeStamp title:(NSString *)title bodyText:(NSString *)bodyText
+{
+    self = [super init];
+    if (self) {
+        self.timeStamp = timeStamp;
+        self.title = title;
+        self.bodyText = bodyText;
+    }
+    return self;
+}
 @end

@@ -10,4 +10,12 @@
 
 @interface Entry : NSObject
 
+//Add properties for timestamp, title, and body text
+
+@property (copy, nonatomic) NSString *timeStamp;
+@property (copy, nonatomic) NSString *title;
+@property (copy, nonatomic) NSString *bodyText;
+
+-(instancetype)initWithTimeStamp:(NSString *)timeStamp title:(NSString *)title bodyText:(NSString *)bodyText;
+
 @end
