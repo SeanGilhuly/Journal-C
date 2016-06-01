@@ -3,9 +3,10 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Journal-C-->
+        <!--Journal List-->
         <scene sceneID="KyT-ma-KKI">
             <objects>
                 <tableViewController id="zav-rh-lhG" customClass="EntryListTableViewController" sceneMemberID="viewController">
@@ -30,6 +31,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="wDl-LG-7QF" kind="show" identifier="toEntryDetailSegue" id="VSl-Xk-hsG"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -37,13 +41,85 @@
                             <outlet property="delegate" destination="zav-rh-lhG" id="3J0-k2-Db7"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Journal-C" id="saG-Te-fCY">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="0RF-CB-fbc"/>
+                    <navigationItem key="navigationItem" title="Journal List" id="saG-Te-fCY">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="0RF-CB-fbc">
+                            <connections>
+                                <segue destination="wDl-LG-7QF" kind="show" identifier="addEntrySegue" id="myN-Tc-9YK"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fKr-wQ-MXa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1340" y="392"/>
+        </scene>
+        <!--Journal Detail-->
+        <scene sceneID="iwX-3j-Ud4">
+            <objects>
+                <viewController id="wDl-LG-7QF" customClass="EntryDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="C4O-QZ-55c"/>
+                        <viewControllerLayoutGuide type="bottom" id="hhH-bH-pP2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3bK-jY-0vO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="IKp-5j-EOc">
+                                <rect key="frame" x="20" y="84" width="560" height="465"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Journal name..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="trd-Du-jV9">
+                                        <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2pd-Z9-UxS">
+                                        <rect key="frame" x="0.0" y="30" width="560" height="435"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                            </stackView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ktb-jT-8u3">
+                                <rect key="frame" x="20" y="556" width="560" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="8Ge-ju-gMa"/>
+                                    <barButtonItem title="Clear" id="Cma-tm-641">
+                                        <connections>
+                                            <action selector="clearButtonTapped:" destination="wDl-LG-7QF" id="ZXY-KI-8JC"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="SFZ-nQ-0FR"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IKp-5j-EOc" firstAttribute="top" secondItem="C4O-QZ-55c" secondAttribute="bottom" constant="20" id="44H-8c-Yjv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ktb-jT-8u3" secondAttribute="trailing" id="LjJ-H4-pxa"/>
+                            <constraint firstItem="IKp-5j-EOc" firstAttribute="leading" secondItem="3bK-jY-0vO" secondAttribute="leadingMargin" id="Mg0-aL-oDR"/>
+                            <constraint firstItem="ktb-jT-8u3" firstAttribute="top" secondItem="IKp-5j-EOc" secondAttribute="bottom" constant="7" id="Ru7-iO-GRF"/>
+                            <constraint firstItem="ktb-jT-8u3" firstAttribute="leading" secondItem="3bK-jY-0vO" secondAttribute="leadingMargin" id="WeT-q4-1nv"/>
+                            <constraint firstItem="IKp-5j-EOc" firstAttribute="trailing" secondItem="3bK-jY-0vO" secondAttribute="trailingMargin" id="f4K-3u-j1x"/>
+                            <constraint firstItem="hhH-bH-pP2" firstAttribute="top" secondItem="ktb-jT-8u3" secondAttribute="bottom" id="woG-pk-TNh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Journal Detail" id="yqs-Al-g97">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="PB9-3n-3GG">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="wDl-LG-7QF" id="UVU-tR-lMy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="entryBodyTextField" destination="2pd-Z9-UxS" id="1nP-uV-Gae"/>
+                        <outlet property="entrytitleTextField" destination="trd-Du-jV9" id="jg7-e2-S74"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ixE-LT-RXH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2045" y="387"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fov-Gp-TXs">
@@ -65,4 +141,7 @@
             <point key="canvasLocation" x="528" y="392"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="VSl-Xk-hsG"/>
+    </inferredMetricsTieBreakers>
 </document>

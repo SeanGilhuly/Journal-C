@@ -12,10 +12,10 @@
 
 //Add properties for timestamp, title, and body text
 
-@property (copy, nonatomic) NSString *timeStamp;
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *bodyText;
+@property (copy, nonatomic) NSDate *timeStamp;
 
--(instancetype)initWithTimeStamp:(NSString *)timeStamp title:(NSString *)title bodyText:(NSString *)bodyText;
+-(instancetype)initWithName: (NSString *)title bodyText:(NSString *)bodyText;
 
 @end

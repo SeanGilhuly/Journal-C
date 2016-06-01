@@ -37,7 +37,10 @@
 
 -(void)removeEntry:(Entry *)entry;
 {
-    [self.entries addObject:entry];
+    [self.entries removeObject:entry];
 }
+
+
+
 
 @end

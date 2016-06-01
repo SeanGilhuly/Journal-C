@@ -7,31 +7,57 @@
 //
 
 #import "EntryDetailViewController.h"
+#import "Entry.h"
+#import "EntryController.h"
 
 @interface EntryDetailViewController ()
+
+#pragma mark - IBOutlet
+@property (weak, nonatomic) IBOutlet UITextField *entrytitleTextField;
+@property (weak, nonatomic) IBOutlet UITextView *entryBodyTextField;
 
 @end
 
 @implementation EntryDetailViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - IBOutlet
+- (IBAction)saveButtonTapped:(id)sender {
+    
+    if (self.entry) {
+        self.entry.title = self.entrytitleTextField.text;
+        self.entry.bodyText = self.entryBodyTextField.text;
+    } else {
+        Entry *entry = [[Entry alloc]initWithName:self.entrytitleTextField.text bodyText:self.entryBodyTextField.text];
+        [[EntryController sharedInstance] addEntry:entry];
+    }
+    [self.navigationController popViewControllerAnimated:true];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)clearButtonTapped:(id)sender {
+    self.entrytitleTextField.text = @"";
+    self.entryBodyTextField.text = @"";
 }
-*/
+
+-(BOOL) textFieldShouldReturn:(UITextField *) entryTitleTextField
+{
+    [entryTitleTextField resignFirstResponder];
+    return YES;
+}
+
+#pragma mark - Functions
+
+-(void)updateWith:(Entry *)entry
+{
+    self.entrytitleTextField.text = entry.title;
+    self.entryBodyTextField.text = entry.bodyText;
+}
+
+
+
 
 @end
